@@ -3,17 +3,44 @@
 <head>
 	<title></title>
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
+	<style type="text/css">
+		#results > img { width: 160px; height: 120px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;}
+		#resTemp > img { width: 160px; height: 120px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;}
+		.full-height {
+                height: 100vh;
+            }
+		.flex-center {
+                align-items: center;
+                justify-content: center;
+                margin:0 auto;
+                margin-bottom: 10px;
+            }
+        .flex-center2 {
+
+            display: flex;
+            justify-content: center;
+            margin:0 auto;
+            margin-bottom: 10px;
+        }
+	</style>
 </head>
 <body>
-	<div id="demo">0</div>
-	<br>
-	<div id="demo2">0</div>
-	<div id="photo-save"></div>
-	<div class="flex-center" id="my_camera"></div>
-	<div id="results"></div>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="webcamjs-master/webcam.min.js"></script>
+
+	<div class="flex-center">
+			<div id="demo">0</div>
+			<br>
+			<div id="demo2">0</div>
+			
+			<div class="flex-center" id="my_camera"></div>
+			<div class="flex-center2" id="results"> <div id = "resTemp"></div></div>
+			<div class="flex-center2" id="photo-save"></div>
+	</div>
 	
+	
+	<link href="css/Bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="webcamjs-master/webcam.min.js"></script>
 	<script>
 		Webcam.set({
             width: 420,
@@ -101,14 +128,24 @@
 				}
 			}
 			function snap(){
+
 				if(ctrSnap<3){
+
 					ctrSnap++;
 					Webcam.snap( function(data_uri) {
 					// display results in page
 					var img = new Image();
 					img.src = data_uri;
-					document.getElementById('results').appendChild( img );
-					document.getElementById('photo-save').innerHTML = '<img id="base64image" src="'+img.src+'"/>';
+					if(document.getElementById('base64image')){
+						document.getElementById('results').appendChild( document.getElementById("base64image") );
+						$('img#base64image').removeAttr('id');
+						document.getElementById('resTemp').innerHTML = '<img id="base64image" src="'+img.src+'"/>';
+					}else{
+						document.getElementById('resTemp').innerHTML = '<img id="base64image" src="'+img.src+'"/>';
+					}
+					
+					// 
+					// document.getElementById('photo-save').innerHTML = '<img id="base64image" src="'+img.src+'"/>';
 					
 					SaveSnap();
 					} );
