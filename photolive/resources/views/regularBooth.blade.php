@@ -54,53 +54,54 @@
     var picture = [];
     var currentData = "";
     function saveSnap(){
-		var currentdate = new Date(); 
-		var datetime = currentdate.getDate() + ""
-	                + (currentdate.getMonth()+1)  + "" 
-	                + currentdate.getFullYear() + ""  
-	                + currentdate.getHours() + ""  
-	                + currentdate.getMinutes() + "" 
-	                + currentdate.getSeconds();
-		var file =  document.getElementById("base64image").src;
-		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-		picture.push(datetime+".png");
-		$.ajax({
-			url: 'upload',
-			type: 'POST',
-			data: {
-				_token: CSRF_TOKEN,
-				base64image: file,
-				fname: datetime
-				},
-			dataType: 'JSON',
-				success: function (data) {
-				console.log(data);
-				}
-			});
-				
-	$("photo-save").hide();
-				
-		if(picture.length>=3){
-			var interval = setInterval(function(){
-			lipat++;
-			document.getElementById('demo').innerHTML = lipat +"";
-				if(lipat >= 3){
-					localStorage.setItem("pic1", picture[0]+"");
-					localStorage.setItem("pic2", picture[1]+"");
-					localStorage.setItem("pic3", picture[2]+"");
-					window.location.href = "creategif/"+picture[0]+"/"+picture[1]+"/"+picture[2];
-				}
-			},1000);
+        var currentdate = new Date(); 
+        var datetime = currentdate.getDate() + ""
+                  + (currentdate.getMonth()+1)  + "" 
+                  + currentdate.getFullYear() + ""  
+                  + currentdate.getHours() + ""  
+                  + currentdate.getMinutes() + "" 
+                  + currentdate.getSeconds();
+        var file =  document.getElementById("base64image").src;
+        //var file = currentData;
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        picture.push(datetime+".png");
+        $.ajax({
+            url: 'upload',
+            type: 'POST',
+            data: {
+              _token: CSRF_TOKEN,
+              base64image: file,
+              fname: datetime
+            },
+            dataType: 'JSON',
+            success: function (data) {
+                console.log(data);
+            }
+        });
+        var picQuan = localStorage.getItem("picQuan");
+        lipatCtr++;
+        if(lipatCtr>=picQuan){
+          var interval = setInterval(function(){
+            lipat++;
+            if(lipat >= 3){
+              var resPic = "";
+              for(i=0;i<picture.length;i++){
+                resPic+= "@"+picture[i];
+              }
+              window.location.href = "postregresult/"+resPic;
+            }
+          },1000);
 
-		}
-	}
+        }
+        $("photo-save").hide();
+    }
     function snap(){
           var canvas = document.getElementById('canvas');
           var context = canvas.getContext('2d');
           // context.scale(-1,1);
           // context.drawImage(video, 0, 0, canvas.width*-1, canvas.height);
           context.drawImage(video, 0, 0, canvas.width, canvas.height);
-          var data = canvas.toDataURL('image/jpeg',1.0);
+          var data = canvas.toDataURL('image/jpeg');
           var img = new Image();
           img.src = data;
           currentData = data;
@@ -113,7 +114,8 @@
           saveSnap();
      }
     function captureDelay(){
-      if(flag<3){
+      var picQuan = localStorage.getItem("picQuan");
+      if(flag<picQuan){
         setTimeout(function(){
         sec++;
         document.getElementById('demo2').innerHTML = sec +"";

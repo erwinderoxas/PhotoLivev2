@@ -16,16 +16,17 @@ class gifcontroller extends Controller
     	// $repImg3 = str_replace('@','\\',$img3);
 
 $frames = array(
-	'C:/Users/Erwin/Desktop/photolive/public/uploads/'.$img1,
-	'C:/Users/Erwin/Desktop/photolive/public/uploads/'.$img2,
-	'C:/Users/Erwin/Desktop/photolive/public/uploads/'.$img3
+	'uploads/'.$img1,
+	'uploads/'.$img2,
+	'uploads/'.$img3
 );
 
 // Or: load images from a dir (sorted, skipping .files):
 //$frames = URL::to('/uploads');
 
 // Optionally: set different durations (in 1/100s units) for each frame
-$durations = array(20, 30, 10, 10);
+// $durations = array(20, 30, 10, 10);
+$durations = array(20);
 
 // Or: you can leave off repeated values from the end:
 //$durations = array(20, 30, 10); // use 10 for the rest
@@ -40,16 +41,22 @@ $gif->create($frames, $durations);
 
 // Or: loop 5 times, then stop:
 //$gif->create($frames, $durations, 5); // default: infinite looping
+//output
+ $gif = $gif->get();
 
-$gif = $gif->get();
-header("Content-type: image/gif");
- echo $gif;
+// header("Content-type: image/gif");
+//  echo $gif;
 $d=mktime(11, 14, 54, 8, 12, 2014);
 //$fname = "".date("Ymdhisa", $d);
 //$fname = str_replace('C:\\Users\\Erwin\\Desktop\\photolive\\public\\uploads','',$repImg1);
 $fname = str_replace('.png','',$img1);
-file_put_contents('C:/Users/Erwin/Desktop/photolive/public/gif/'.$fname.'.gif', $gif);
+file_put_contents('gif/'.$fname.'.gif', $gif);
 //$gif->save("animated.gif");
+
+// // return view("gifresult");
+// return redirect()->route('gifresult');
+return redirect('gif-result');
 exit;
+
     }
 }

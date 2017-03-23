@@ -8,32 +8,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/Bootstrap.min.css">
-        <link rel="stylesheet" href="css/stylesss.css">
+        <link rel="stylesheet" href="css/styles.css">
         <!-- <link href="css/full-slider.css" rel="stylesheet"> -->
  
         <script src="js/tracking-min.js"></script>
         <script src="js/face-min.js"></script>
         <script src = "js/jquery-3.1.1.min.js"></script>
-        <script src="js/dat.gui.min.js"></script>
+		<script src="js/dat.gui.min.js"></script>
         <!-- <script src = "js/photolive.js"></script>    -->
         <script src = "js/bootstrap.min.js"></script> 
 
-  <style type="text/css">
-    #video{
-      transform: scaleX(-1);
-    }
-  </style>
-  </head>
+
+</head>
   <body id = "wrapper">
     <div class="container-fluid demo-frame" id = "wrapper">
         <div class = "demo-container row jumbotron text-center">
-            <img src="images/homelogo.png">
+            <h1>PhotoLive</h1>
             <div class = "container-fluid text-center" id="my_camera"></div>
             <video id="video" width="320" height="240" preload autoplay loop muted></video>
-            <canvas id="canvas" width="0" height="260"></canvas>
+            <canvas id="canvas" width="320" height="240"></canvas>
             <p id = "demo"></p>
             <p id = "face"></p>
-            <a href="page2"><img src="images/btnStart.png" class = "start"></a>
+            <a href="page2" type="button" class = "btn btn-primary">NEXT</a>
         </div>
     </div>
 
@@ -64,20 +60,8 @@
             }
         }
       });
-    navigator.getMedia = ( navigator.getUserMedia || // use the proper vendor prefix
-                           navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia ||
-                           navigator.msGetUserMedia);
 
-    navigator.getMedia({video: true}, function() {
-      var interval = setInterval(function(){myCounter()},1000);
-    }, function() {
-      var interval = setInterval(function(){
-        counter = 0;
-        document.getElementById("demo").innerHTML = counter;
-      },1000);
-    });
-   
+   var interval = setInterval(function(){myCounter()},1000);
     function myCounter(){
       if (counter<=4){
         counter++;

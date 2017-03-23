@@ -9,54 +9,70 @@
 
     <title>Photolive</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/stylesss.css" rel="stylesheet">
     <script src = "js/jquery-3.1.1.min.js"></script>    
     <script src = "js/photolive.js"></script>  
 
-<style>
-    #left{  
-        background-color:#ffffff;
-        width:50%;
-        height:auto;
-        display: table;
-    }
-    
-    #right{
-        background-color:#ffffff;
-        width:50%;
-        height:auto;
-        display: table;
-    }
-
-</style>
    
 </head>
 
 <body>
-<div id="wrapper">
-<div id="left" class="container pull-left">
-gif
-<button type = "button" class = "btn btn-default btn-primary-outline" onclick="gifPage3()">
-    <img style="width:100%; height:100vh;" src="images/bg.jpg">
-</button>
-</div>
 
-<div id = "text-center">
+<div class = "container-fluid">
+    <div class = "row" style="margin-top: 50px">
+        <div class = "col-sm-6">
+           
+           <div class = "row">
+                <div class = "col-sm-12">
+                    <div style="width:80%; height:50%;">
+                        <a href="#"><img src="images/frame.gif"  onclick="gifPage3()" class = "start margin img-responsive  center-block"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "row">
+                <div class = "col-sm-12">
+                    <div style="width:80%; height:50%;">
+                        <a href="#"><img src="images/btnGif2.png"  onclick="gifPage3()" class = "start btnMargin img-responsive  center-block"></a>
+                    </div>
+                </div>
+            </div>
+        
+
+        </div>
+
+        <div class = "col-sm-6"> 
+           
+           <div class = "row">
+                <div class = "col-sm-12">
+                    <div  style="width:80%; height:50%;">
+                        <a href="#"><img src="images/icon.png"  onclick="regPage3()" class = "start margin img-responsive  center-block"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "row">
+                <div class = "col-sm-12">
+                    <div style="width:80%; height:50%;">
+                        <a href="#"><img src="images/btnReg2.png"  onclick="regPage3()" class = "start btnMargin img-responsive  center-block"></a>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <div id = "text-center">
     <h1 id = "count"></h1>
+    </div>
+    <div id = "text-top">
+    </div>
+    <nav aria-label="...">
+    <ul class="pager">
+      <li class="previous"><a href="/"><span aria-hidden="true">&larr;</span>Back</a></li>
+      <li class="next disabled"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+  </nav>
 </div>
-
-<div id="right" class="container pull-right">
-reg
-<button type = "button" class = "btn btn-default btn-primary-outline" onclick="regPage3()">
-    <img style="width:100%; height:100vh;" src="images/bg.jpg">
-</button>
-</div>
-
-<div id = "text-top">
-</div>
-
-</div>
-
 
 <script>
 var idleTime = 20, flag = 0;
@@ -66,7 +82,7 @@ $(document).ready(function () {
     flag = 0;
     //Zero the idle timer on mouse movement.
     $(this).mousemove(function (e) {
-        document.getElementById("count").innerHTML = "";
+        document.getElementById("count").innerHTML ="";
         document.getElementById("text-top").innerHTML = "";
         idleTime = 20;
         flag = 0;
@@ -82,7 +98,8 @@ $(document).ready(function () {
 
 function timerIncrement() {
     if(flag==0){
-        idleTime = idleTime - 1;
+        idleTime = idleTime - 1;    
+         //document.getElementById("text-top").innerHTML = idleTime+"";
     }
     
     if (idleTime <= 0) { // 20 seconds
@@ -109,9 +126,15 @@ function original(){
 
 function regPage3()
 {
-    flag = 1;
-	window.location.href = ".html";
-    
+    /*flag = 1;
+    $.ajax({
+        url:"regPage3.php",
+        cache:false,
+        success:function(html){
+            $("#wrapper").hide().html(html).fadeIn('slow');
+        }
+    });*/
+    window.location.href = "regular-frame";
 }
 function gifPage3()
 {
@@ -122,7 +145,7 @@ function gifPage3()
             $("#wrapper").hide().html(html).fadeIn('slow');
         }
     });*/
-    window.location.href = "create-gif";
+    window.location.href = "gif-booth";
 }
 
 </script>
