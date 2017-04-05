@@ -53,6 +53,9 @@ $fname = str_replace('.png','',$img1);
 file_put_contents('gif/'.$fname.'.gif', $gif);
 //$gif->save("animated.gif");
 
+session_start();
+$_SESSION['picture'] = 'gif/'.$fname.'.gif';  
+ 
 // // return view("gifresult");
 // return redirect()->route('gifresult');
 return redirect('gif-result');

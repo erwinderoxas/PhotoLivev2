@@ -64,8 +64,8 @@ margin-left: 75px;
  }
 
 .frame{
-	border: 3px solid #38c4e4; 
-	padding: 10px;
+	border: 1px solid #38c4e4; 
+	padding: 0px;
 }
 .frame:hover{
 	-moz-box-shadow: 0 0 50px #ccc; 

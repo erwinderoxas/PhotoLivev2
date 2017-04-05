@@ -33,14 +33,14 @@ Route::get('gif-result', function () {
 Route::get('regular-result', function () {
     return view('regularresult');
 });
-
-// Route::get('merge', function () {
-//     return view('trash/mergeTest');
-// });
-
-// Route::get('regular-result/{quan}/{picture}','regularresult@index');
+Route::get('share', function () {
+    return view('share');
+});
 
 
+
+Route::get('twitter-share/{status}','twittershareController@index');
+Route::get('callback','twittercallback@index');
 Route::post('upload','uploadcontroller@index');
 Route::get('postregresult/{resPic}','regresultcoontroller@index');
 Route::post('mergepic','mergecon@index');
